@@ -16,6 +16,7 @@ export class ReminderDialogComponent implements OnInit {
   public actionEnum: typeof ActionEnum;
   public reminderForm: FormGroup;
   public cities: CityModel[];
+  public colors: string[];
 
   constructor(
     private _calendarService: CalendarService,
@@ -32,6 +33,7 @@ export class ReminderDialogComponent implements OnInit {
   private initVariables(): void {
     this.actionEnum = ActionEnum;
     this.cities = CITIES;
+    this.colors = ['#94dbff', '#ffeb94', '#afff94', '#94dbff', '#ff94ff'];
     this.initReminderForm();
   }
 

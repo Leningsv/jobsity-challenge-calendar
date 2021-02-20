@@ -1,4 +1,10 @@
-<button (click)="this.editHandler.emit()">Edit</button>
-<button (click)="this.viewHandler.emit()">View</button>
-<button (click)="this.removeHandler.emit()">Remove</button>
-<pre>{{this.reminder | json}}</pre>
+<div [ngStyle]="{'background-color': this.reminder.color}">
+  <div class="text-right">
+    <button class="btn btn-sm btn-secondary" (click)="this.editHandler.emit()">Edit</button>
+    <button class="btn btn-sm btn-primary" (click)="this.viewHandler.emit()">View</button>
+    <button class="btn btn-sm btn-danger" (click)="this.removeHandler.emit()">Remove</button>
+  </div>
+  <div>{{this.reminder.city}} {{this.reminder.weather}}</div>
+  <div>{{this.reminder.time}}</div>
+  <div>{{this.reminder.description}}</div>
+</div>

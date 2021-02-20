@@ -1,9 +1,13 @@
 <div>
   <h4>{{this.date | customDate: 'D'}}</h4>
 </div>
-<div>
-  <button (click)="this.openReminderDialog(this.actionEnum.insert)">Add Reminder</button>
-  <button *ngIf="this.reminders?.length" (click)="this.removeReminders()">Remove All</button>
+<div *ngIf="this.date | validateCalendarDate">
+  <button class="btn btn-sm btn-primary" (click)="this.openReminderDialog(this.actionEnum.insert)">
+    add
+  </button>
+  <button class="btn btn-sm btn-danger" *ngIf="this.reminders?.length" (click)="this.removeReminders()">
+    delete all
+  </button>
 </div>
 <div *ngFor="let reminder of this.reminders| sortReminders; let indexReminder= index">
   <app-reminder [reminder]="reminder" (removeHandler)="this.removeReminder(reminder, indexReminder)"

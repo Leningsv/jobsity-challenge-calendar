@@ -1,27 +1,26 @@
 # JobsityChallengeCalendar
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.1.
+For run the project:
 
-## Development server
+1. Download the project
+1. Install dependencies: npm install
+1. Run de project: ng serve
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+Goals:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Mandatory
 
-## Build
+1. Ability to add a new "reminder" (max 30 chars) for a user entered day and time. Also,
+include a city.
+1. Display reminders on the calendar view in the correct time order.
+1. Allow the user to select color when creating a reminder and display it appropriately.
+1. Ability to edit reminders – including changing text, city, time and color. (Except day for project structure)
+1. Add a weather service call from a free API such as Open Weather Map, and get the
+   weather forecast (ex. Rain) for the date of the calendar reminder based on the city
+1. Unit Test (excluded - for making this project only use manual test)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Bonus
+1. Expand the calendar to support more than the current month. (All months in the current year)
+1. Properly handle overflow when multiple reminders appear on the same date.
+1. Functionality to delete one or ALL the reminders for a specific day

@@ -1,5 +1,7 @@
 <div [formGroup]="this.reminderForm">
-  <button (click)="this.close()">Close</button>
+  <button type="button" class="close" (click)="this.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
   <div><h4>{{this.dialogData.reminder?.date | customDate: 'ddd, DD MMMM YYYY'}}</h4></div>
   <div class="row">
     <mat-form-field class="col-6" floatLabel="always">
@@ -25,15 +27,21 @@
     </mat-form-field>
     <mat-form-field class="col-12" floatLabel="always">
       <mat-label>Color</mat-label>
-      <input matInput placeholder="red" formControlName="color" required>
-      <mat-error>Invalid description</mat-error>
+      <mat-select formControlName="color" required>
+        <mat-select-trigger [ngStyle]="{'background-color': this.reminderForm.get('color')?.value}">
+          {{this.reminderForm.get('color')?.value}}
+        </mat-select-trigger>
+        <mat-option [ngStyle]="{'background-color': color}" *ngFor="let color of this.colors" [value]="color">
+          {{color}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
-  <button (click)="this.registerReminder();" [disabled]="this.reminderForm.invalid"
+  <button class="btn btn-primary" (click)="this.registerReminder();" [disabled]="this.reminderForm.invalid"
           *ngIf="this.dialogData.action === this.actionEnum.insert">
     Register reminder
   </button>
-  <button (click)="this.updateReminder();" [disabled]="this.reminderForm.invalid"
+  <button class="btn btn-primary" (click)="this.updateReminder();" [disabled]="this.reminderForm.invalid"
           *ngIf="this.dialogData.action === this.actionEnum.edit">
     Update reminder
   </button>

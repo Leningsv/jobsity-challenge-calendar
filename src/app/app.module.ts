@@ -15,6 +15,7 @@ import {CustomDatePipe} from './pipes/custom-date.pipe';
 import {GroupDaysInWeeksPipe} from './pipes/group-days-in-weeks.pipe';
 import {HttpClientModule} from '@angular/common/http';
 import {SortRemindersPipe} from './pipes/sort-reminders.pipe';
+import {ValidateCalendarDatePipe} from './pipes/validate-calendar-date.pipe';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ export class AppModule {
   public static PIPES = [
     CustomDatePipe,
     GroupDaysInWeeksPipe,
-    SortRemindersPipe
+    SortRemindersPipe,
+    ValidateCalendarDatePipe
   ];
 }
