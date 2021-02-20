@@ -1,0 +1,13 @@
+<button (click)="this.close()">Close</button>
+
+<div [formGroup]="this.reminderForm">
+  <mat-form-field appearance="allways">
+    <mat-label>Description</mat-label>
+    <input matInput placeholder="play video games" formControlName="description" required>
+    <mat-error>Invalid description</mat-error>
+  </mat-form-field>
+</div>
+
+<button [disabled]="this.reminderForm.invalid" *ngIf="this.dialogData.action === this.actionEnum.insert">
+  Add
+</button>
