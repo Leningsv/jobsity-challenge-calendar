@@ -12,6 +12,9 @@ import {MaterialImportsModule} from './modules/material-imports.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CalendarComponent} from './components/calendar/calendar.component';
 import {CustomDatePipe} from './pipes/custom-date.pipe';
+import {GroupDaysInWeeksPipe} from './pipes/group-days-in-weeks.pipe';
+import {HttpClientModule} from '@angular/common/http';
+import {SortRemindersPipe} from './pipes/sort-reminders.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,8 @@ import {CustomDatePipe} from './pipes/custom-date.pipe';
     BrowserAnimationsModule,
     MaterialImportsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -45,6 +49,8 @@ export class AppModule {
     ReminderDialogComponent
   ];
   public static PIPES = [
-    CustomDatePipe
+    CustomDatePipe,
+    GroupDaysInWeeksPipe,
+    SortRemindersPipe
   ];
 }

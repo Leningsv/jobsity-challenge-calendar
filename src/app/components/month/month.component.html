@@ -1,3 +1,16 @@
-<div *ngFor="let day of this.days">
-  {{this.day | customDate: 'MMMM-dddd-DD'}}
-</div>
+<table class="table table-bordered">
+  <tr>
+    <th>Sunday</th>
+    <th>Monday</th>
+    <th>Tuesday</th>
+    <th>Wednesday</th>
+    <th>Thursday</th>
+    <th>Friday</th>
+    <th>Saturday</th>
+  </tr>
+  <tr *ngFor="let week of this.days| groupDaysInWeeks">
+    <td [attr.readonly]="true" *ngFor="let day of week">
+      <app-day [date]="day"></app-day>
+    </td>
+  </tr>
+</table>

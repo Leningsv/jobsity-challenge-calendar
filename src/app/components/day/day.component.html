@@ -1,2 +1,13 @@
-<p>day works!</p>
-<button (click)="this.addReminder()">Add Reminder</button>
+<div>
+  <h4>{{this.date | customDate: 'D'}}</h4>
+</div>
+<div>
+  <button (click)="this.openReminderDialog(this.actionEnum.insert)">Add Reminder</button>
+  <button *ngIf="this.reminders?.length" (click)="this.removeReminders()">Remove All</button>
+</div>
+<div *ngFor="let reminder of this.reminders| sortReminders; let indexReminder= index">
+  <app-reminder [reminder]="reminder" (removeHandler)="this.removeReminder(reminder, indexReminder)"
+                (editHandler)="this.openReminderDialog(this.actionEnum.edit, reminder, indexReminder)"
+                (viewHandler)="this.openReminderDialog(this.actionEnum.view, reminder)"
+  ></app-reminder>
+</div>

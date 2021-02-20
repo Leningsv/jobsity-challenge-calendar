@@ -1,1 +1,4 @@
-<p>reminder works!</p>
+<button (click)="this.editHandler.emit()">Edit</button>
+<button (click)="this.viewHandler.emit()">View</button>
+<button (click)="this.removeHandler.emit()">Remove</button>
+<pre>{{this.reminder | json}}</pre>

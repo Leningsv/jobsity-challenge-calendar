@@ -1,6 +1,0 @@
-export interface ReminderModel {
-  description: string;
-  city: string;
-  day: number;
-  time: string;
-}

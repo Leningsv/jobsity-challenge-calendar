@@ -1,13 +1,41 @@
-<button (click)="this.close()">Close</button>
-
 <div [formGroup]="this.reminderForm">
-  <mat-form-field appearance="allways">
-    <mat-label>Description</mat-label>
-    <input matInput placeholder="play video games" formControlName="description" required>
-    <mat-error>Invalid description</mat-error>
-  </mat-form-field>
+  <button (click)="this.close()">Close</button>
+  <div><h4>{{this.dialogData.reminder?.date | customDate: 'ddd, DD MMMM YYYY'}}</h4></div>
+  <div class="row">
+    <mat-form-field class="col-6" floatLabel="always">
+      <mat-label>City</mat-label>
+      <mat-select formControlName="city" required>
+        <mat-option *ngFor="let city of this.cities" [value]="city.key"  (click)="this.changeCity(city)">
+          {{city.displayName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="this.reminderForm.get('weather').value" class="col-6">
+      <h2>{{this.reminderForm.get('weather').value}}</h2>
+    </div>
+    <mat-form-field class="col-12" floatLabel="always">
+      <mat-label>Time</mat-label>
+      <input matInput type="time" placeholder="13:45" formControlName="time" required>
+      <mat-error>Invalid description</mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-12" floatLabel="always">
+      <mat-label>Description</mat-label>
+      <input matInput placeholder="play video games" maxlength="30" formControlName="description" required>
+      <mat-error>Invalid description</mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-12" floatLabel="always">
+      <mat-label>Color</mat-label>
+      <input matInput placeholder="red" formControlName="color" required>
+      <mat-error>Invalid description</mat-error>
+    </mat-form-field>
+  </div>
+  <button (click)="this.registerReminder();" [disabled]="this.reminderForm.invalid"
+          *ngIf="this.dialogData.action === this.actionEnum.insert">
+    Register reminder
+  </button>
+  <button (click)="this.updateReminder();" [disabled]="this.reminderForm.invalid"
+          *ngIf="this.dialogData.action === this.actionEnum.edit">
+    Update reminder
+  </button>
 </div>
 
-<button [disabled]="this.reminderForm.invalid" *ngIf="this.dialogData.action === this.actionEnum.insert">
-  Add
-</button>

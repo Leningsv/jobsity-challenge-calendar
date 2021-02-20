@@ -4,8 +4,8 @@ import {CityModel} from '../../utils/models/city.model';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {CITIES} from '../../utils/settings/city.settings';
 import {ReminderComponent} from '../reminder/reminder.component';
-import {DialogDataModel} from '../../utils/models/dialog-data.model';
 import {ActionEnum} from '../../utils/enums/action.enum';
+import {CalendarService} from '../../services/calendar.service';
 
 @Component({
   selector: 'app-reminder-dialog',
@@ -18,9 +18,10 @@ export class ReminderDialogComponent implements OnInit {
   public cities: CityModel[];
 
   constructor(
+    private _calendarService: CalendarService,
     private _formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ReminderComponent>,
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogDataModel) {
+    @Inject(MAT_DIALOG_DATA) public dialogData: any) {
   }
 
   ngOnInit(): void {
@@ -35,18 +36,34 @@ export class ReminderDialogComponent implements OnInit {
   }
 
   private setData(): void {
-    debugger
-    if (this.dialogData.action === ActionEnum.edit) {
-      this.reminderForm.reset(this.dialogData.data);
+    this.reminderForm.reset(this.dialogData.reminder);
+    if (this.dialogData.action === ActionEnum.view) {
+      this.reminderForm.disable();
     }
   }
 
   private initReminderForm(): void {
     this.reminderForm = this._formBuilder.group({
-      description: ['', [Validators.required]],
+      description: ['', [Validators.required, Validators.maxLength(30)]],
       city: ['', [Validators.required]],
-      day: ['', [Validators.required]],
-      time: ['', [Validators.required]]
+      date: ['', [Validators.required]],
+      time: ['', [Validators.required]],
+      color: ['', [Validators.required]],
+      weather: ['']
+    });
+  }
+
+  public registerReminder(): void {
+    this.close({
+      action: ActionEnum.insert,
+      reminder: this.reminderForm.getRawValue()
+    });
+  }
+
+  public updateReminder(): void {
+    this.close({
+      action: ActionEnum.update,
+      reminder: this.reminderForm.getRawValue()
     });
   }
 
@@ -54,4 +71,8 @@ export class ReminderDialogComponent implements OnInit {
     this.dialogRef.close(data);
   }
 
+  public async changeCity(city: any): Promise<void> {
+    const weather: any = await this._calendarService.getWeatherByCity(city.key).toPromise();
+    this.reminderForm.get('weather').setValue(weather?.weather[0]?.description);
+  }
 }

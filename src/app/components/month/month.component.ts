@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {ApplicationBase} from '../../utils/application.base';
 
 @Component({
@@ -6,19 +6,21 @@ import {ApplicationBase} from '../../utils/application.base';
   templateUrl: './month.component.html',
   styleUrls: ['./month.component.scss']
 })
-export class MonthComponent extends ApplicationBase implements OnInit {
+export class MonthComponent extends ApplicationBase implements OnChanges {
   @Input()
   public month: string;
-  public weeks: any[];
   public days: any[];
 
   constructor() {
     super();
   }
 
-  ngOnInit(): void {
-    this.initVariables();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.month.currentValue) {
+      this.initVariables();
+    }
   }
+
 
   private initVariables(): void {
     this.initDays();
@@ -27,7 +29,7 @@ export class MonthComponent extends ApplicationBase implements OnInit {
   private initDays(): void {
     this.days = [];
     const startDate = this.getStartDate(this.moment(this.month + '-' + '1'));
-    const endDate = this.getEndDate(this.moment(this.month + '-' + this.moment().daysInMonth().toString()));
+    const endDate = this.getEndDate(this.moment(this.month + '-' + this.moment(this.month).daysInMonth().toString()));
     console.log(startDate.format('M-DD'));
     console.log(endDate.format('M-DD'));
     const pivotDate = this.moment(startDate);
