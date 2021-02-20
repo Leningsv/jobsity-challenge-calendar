@@ -6,23 +6,36 @@ import {CITIES} from '../../utils/settings/city.settings';
 import {ReminderComponent} from '../reminder/reminder.component';
 import {ActionEnum} from '../../utils/enums/action.enum';
 import {CalendarService} from '../../services/calendar.service';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {ApplicationBase} from '../../utils/application.base';
 
 @Component({
   selector: 'app-reminder-dialog',
   templateUrl: './reminder-dialog.component.html',
-  styleUrls: ['./reminder-dialog.component.scss']
+  styleUrls: ['./reminder-dialog.component.scss'],
+  providers: [
+    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
+    // `MatMomentDateModule` in your applications root module. We provide it at the component level
+    // here, due to limitations of our example generation script.
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
-export class ReminderDialogComponent implements OnInit {
+export class ReminderDialogComponent extends ApplicationBase implements OnInit {
   public actionEnum: typeof ActionEnum;
   public reminderForm: FormGroup;
   public cities: CityModel[];
   public colors: string[];
+  public minDate: any;
+  public maxDate: any;
 
   constructor(
     private _calendarService: CalendarService,
     private _formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ReminderComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogData: any) {
+    super();
   }
 
   ngOnInit(): void {
@@ -31,6 +44,8 @@ export class ReminderDialogComponent implements OnInit {
   }
 
   private initVariables(): void {
+    this.minDate = this.moment();
+    this.maxDate = this.moment().add(1, 'y');
     this.actionEnum = ActionEnum;
     this.cities = CITIES;
     this.colors = ['#94dbff', '#ffeb94', '#afff94', '#94dbff', '#ff94ff'];
@@ -51,7 +66,8 @@ export class ReminderDialogComponent implements OnInit {
       date: ['', [Validators.required]],
       time: ['', [Validators.required]],
       color: ['', [Validators.required]],
-      weather: ['']
+      weather: [''],
+      id: []
     });
   }
 

@@ -15,7 +15,7 @@ Goals:
 include a city.
 1. Display reminders on the calendar view in the correct time order.
 1. Allow the user to select color when creating a reminder and display it appropriately.
-1. Ability to edit reminders – including changing text, city, time and color. (Except day for project structure)
+1. Ability to edit reminders – including changing text, city, time and color.
 1. Add a weather service call from a free API such as Open Weather Map, and get the
    weather forecast (ex. Rain) for the date of the calendar reminder based on the city
 1. Unit Test (excluded - for making this project only use manual test)

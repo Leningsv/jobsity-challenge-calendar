@@ -5,13 +5,14 @@
   <button class="btn btn-sm btn-primary" (click)="this.openReminderDialog(this.actionEnum.insert)">
     add
   </button>
-  <button class="btn btn-sm btn-danger" *ngIf="this.reminders?.length" (click)="this.removeReminders()">
+  <button class="btn btn-sm btn-danger" *ngIf="(this.calendarService.reminders| filterRemindersByDate: this.date)?.length"
+          (click)="this.removeReminders()">
     delete all
   </button>
 </div>
-<div *ngFor="let reminder of this.reminders| sortReminders; let indexReminder= index">
-  <app-reminder [reminder]="reminder" (removeHandler)="this.removeReminder(reminder, indexReminder)"
-                (editHandler)="this.openReminderDialog(this.actionEnum.edit, reminder, indexReminder)"
+<div *ngFor="let reminder of this.calendarService.reminders| filterRemindersByDate: this.date| sortReminders;">
+  <app-reminder [reminder]="reminder" (removeHandler)="this.removeReminder(reminder)"
+                (editHandler)="this.openReminderDialog(this.actionEnum.edit, reminder)"
                 (viewHandler)="this.openReminderDialog(this.actionEnum.view, reminder)"
   ></app-reminder>
 </div>

@@ -2,7 +2,6 @@
   <button type="button" class="close" (click)="this.close()">
     <span aria-hidden="true">&times;</span>
   </button>
-  <div><h4>{{this.dialogData.reminder?.date | customDate: 'ddd, DD MMMM YYYY'}}</h4></div>
   <div class="row">
     <mat-form-field class="col-6" floatLabel="always">
       <mat-label>City</mat-label>
@@ -15,6 +14,12 @@
     <div *ngIf="this.reminderForm.get('weather').value" class="col-6">
       <h2>{{this.reminderForm.get('weather').value}}</h2>
     </div>
+    <mat-form-field class="col-12" floatLabel="always">
+      <mat-label>Date</mat-label>
+      <input [min]="this.minDate" [max]="this.maxDate" formControlName="date" matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
     <mat-form-field class="col-12" floatLabel="always">
       <mat-label>Time</mat-label>
       <input matInput type="time" placeholder="13:45" formControlName="time" required>

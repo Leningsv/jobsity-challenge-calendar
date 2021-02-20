@@ -5,4 +5,5 @@ export interface ReminderModel {
   time?: string;
   color?: string;
   weather?: string;
+  id?: number;
 }

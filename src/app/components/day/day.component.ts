@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ReminderDialogComponent} from '../reminder-dialog/reminder-dialog.component';
 import {ApplicationBase} from '../../utils/application.base';
 import {ReminderModel} from '../../utils/models/reminder.model';
+import {CalendarService} from '../../services/calendar.service';
 
 @Component({
   selector: 'app-day',
@@ -13,10 +14,10 @@ import {ReminderModel} from '../../utils/models/reminder.model';
 export class DayComponent extends ApplicationBase implements OnInit {
   @Input()
   public date: string;
-  public reminders: any[];
   public actionEnum: typeof ActionEnum;
 
   constructor(
+    public calendarService: CalendarService,
     private _dialog: MatDialog) {
     super();
   }
@@ -27,10 +28,9 @@ export class DayComponent extends ApplicationBase implements OnInit {
 
   private initVariables(): void {
     this.actionEnum = ActionEnum;
-    this.reminders = [];
   }
 
-  public openReminderDialog(action: ActionEnum, reminder?: ReminderModel, index?: number): void {
+  public openReminderDialog(action: ActionEnum, reminder?: ReminderModel): void {
     const data: any = {
       action
     };
@@ -50,26 +50,29 @@ export class DayComponent extends ApplicationBase implements OnInit {
         return;
       }
       if (result.action === ActionEnum.insert) {
-        this.reminders.push(result.reminder);
-        this.reminders = [...this.reminders];
+        this.calendarService.addReminder(result.reminder);
         return;
       }
       if (result.action === ActionEnum.update) {
-        return this.reminders[index] = result.reminder;
+        this.calendarService.updateReminder(result.reminder);
+        return;
       }
     });
   }
 
-  public removeReminder(reminder: ReminderModel, index: number): void {
+  public removeReminder(reminder: ReminderModel): void {
     const deleteReminder = confirm(`Are you sure to delete ${reminder.description}`);
     if (!deleteReminder) {
       return;
     }
-    this.reminders.splice(index, 1);
+    this.calendarService.deleteReminder(reminder.id);
   }
 
   public removeReminders(): void {
     const confirmRemove = confirm('Are you sure to delete all reminders');
-    this.reminders = [];
+    if (!confirmRemove) {
+      return;
+    }
+    this.calendarService.deleteRemindersByDate(this.moment(this.date).format('YYYY-M-D'));
   }
 }

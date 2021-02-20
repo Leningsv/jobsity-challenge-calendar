@@ -16,6 +16,8 @@ import {GroupDaysInWeeksPipe} from './pipes/group-days-in-weeks.pipe';
 import {HttpClientModule} from '@angular/common/http';
 import {SortRemindersPipe} from './pipes/sort-reminders.pipe';
 import {ValidateCalendarDatePipe} from './pipes/validate-calendar-date.pipe';
+import { FilterRemindersByDatePipe } from './pipes/filter-reminders-by-date.pipe';
+import { FindInListPipe } from './pipes/findInList.pipe';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ export class AppModule {
     CustomDatePipe,
     GroupDaysInWeeksPipe,
     SortRemindersPipe,
-    ValidateCalendarDatePipe
+    ValidateCalendarDatePipe,
+    FilterRemindersByDatePipe,
+    FindInListPipe
   ];
 }
