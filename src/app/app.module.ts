@@ -18,7 +18,6 @@ import {CustomDatePipe} from './pipes/custom-date.pipe';
     AppModule.COMPONENTS,
     AppModule.DIALOGS,
     AppModule.PIPES,
-    CustomDatePipe
   ],
   imports: [
     BrowserModule,
