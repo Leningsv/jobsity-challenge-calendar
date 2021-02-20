@@ -45,7 +45,7 @@ export class ReminderDialogComponent extends ApplicationBase implements OnInit {
 
   private initVariables(): void {
     this.minDate = this.moment();
-    this.maxDate = this.moment().add(1, 'y');
+    this.maxDate = this.moment().endOf('year');
     this.actionEnum = ActionEnum;
     this.cities = CITIES;
     this.colors = ['#94dbff', '#ffeb94', '#afff94', '#94dbff', '#ff94ff'];
