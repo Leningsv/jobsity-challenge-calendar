@@ -18,7 +18,7 @@ include a city.
 1. Ability to edit reminders – including changing text, city, time and color.
 1. Add a weather service call from a free API such as Open Weather Map, and get the
    weather forecast (ex. Rain) for the date of the calendar reminder based on the city
-1. Unit Test (excluded - for making this project only use manual test)
+1. Unit Test (Crud reminders);
 
 ### Bonus
 1. Expand the calendar to support more than the current month. (All months in the current year)
