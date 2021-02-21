@@ -1,17 +1,26 @@
-<table class="table table-bordered">
-  <tr>
-    <th>Sunday</th>
-    <th>Monday</th>
-    <th>Tuesday</th>
-    <th>Wednesday</th>
-    <th>Thursday</th>
-    <th>Friday</th>
-    <th>Saturday</th>
-  </tr>
-  <tr *ngFor="let week of this.days| groupDaysInWeeks">
-    <td [ngClass]="{'outside-date-month': (this.month|customDate: 'YYYY-M') !== (day| customDate: 'YYYY-M') }"
-        *ngFor="let day of week">
-      <app-day [date]="day"></app-day>
-    </td>
-  </tr>
-</table>
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-primary" (click)="this.openAddReminderDialog()">Add Reminder</button>
+  </div>
+  <div class="col-12">
+    <table class="table table-bordered">
+      <tr>
+        <th>Sunday</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+      </tr>
+      <tr *ngFor="let week of this.days| groupDaysInWeeks">
+        <td [ngClass]="{'outside-date-month': (this.month|customDate: 'YYYY-M') !== (day| customDate: 'YYYY-M') }"
+            *ngFor="let day of week">
+          <app-day [date]="day"></app-day>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+

@@ -1,5 +1,10 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {ApplicationBase} from '../../utils/application.base';
+import {ActionEnum} from '../../utils/enums/action.enum';
+import {ReminderModel} from '../../utils/models/reminder.model';
+import {ReminderDialogComponent} from '../reminder-dialog/reminder-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {CalendarService} from '../../services/calendar.service';
 
 @Component({
   selector: 'app-month',
@@ -11,7 +16,10 @@ export class MonthComponent extends ApplicationBase implements OnChanges {
   public month: string;
   public days: any[];
 
-  constructor() {
+  constructor(
+    private _matDialog: MatDialog,
+    private _calendarService: CalendarService
+  ) {
     super();
     this.days = [];
   }
@@ -54,6 +62,26 @@ export class MonthComponent extends ApplicationBase implements OnChanges {
     }
     date.add(1, 'd');
     return this.getEndDate(date);
+  }
+
+  public openAddReminderDialog(): void {
+    const data: any = {
+      action: ActionEnum.insert,
+      reminder: {date: this.moment()}
+    };
+    const dialogRef = this._matDialog.open(ReminderDialogComponent, {
+      width: '750px',
+      data
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (!result) {
+        return;
+      }
+      if (result.action === ActionEnum.insert) {
+        this._calendarService.addReminder(result.reminder);
+        return;
+      }
+    });
   }
 
 }

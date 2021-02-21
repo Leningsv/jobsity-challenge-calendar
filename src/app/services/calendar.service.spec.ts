@@ -39,7 +39,7 @@ describe('CalendarService', () => {
       time: '15:30',
     };
     service.addReminder(reminder);
-    expect(service.reminders.find(x => x.id === reminder.id)?.id).toEqual(reminder.id);
+    expect(service.reminders).toContain(service.reminders.find(x => x.id === reminder.id));
   });
 
   it('delete reminder', async () => {
