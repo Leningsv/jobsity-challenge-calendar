@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MonthComponent } from './month.component';
+import {MonthComponent} from './month.component';
+import {GroupDaysInWeeksPipe} from '../../pipes/group-days-in-weeks.pipe';
 
 describe('MonthComponent', () => {
   let component: MonthComponent;
@@ -8,9 +9,9 @@ describe('MonthComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MonthComponent ]
+      declarations: [MonthComponent, GroupDaysInWeeksPipe]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

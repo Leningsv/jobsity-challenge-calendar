@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CalendarComponent } from './calendar.component';
+import {CustomDatePipe} from '../../pipes/custom-date.pipe';
 
 describe('CalendarComponent', () => {
   let component: CalendarComponent;
@@ -8,7 +9,7 @@ describe('CalendarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CalendarComponent ]
+      declarations: [ CalendarComponent, CustomDatePipe ]
     })
     .compileComponents();
   });

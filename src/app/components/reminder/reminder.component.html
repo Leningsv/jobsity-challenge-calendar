@@ -1,13 +1,13 @@
-<div [ngStyle]="{'background-color': this.reminder.color}">
+<div [ngStyle]="{'background-color': this.reminder?.color}">
   <div class="text-right">
     <button class="btn btn-sm btn-secondary" (click)="this.editHandler.emit()">Edit</button>
     <button class="btn btn-sm btn-primary" (click)="this.viewHandler.emit()">View</button>
     <button class="btn btn-sm btn-danger" (click)="this.removeHandler.emit()">Remove</button>
   </div>
   <div class="row">
-    <div class="col">{{(this.reminder.city | findInList: this.cities: 'key')?.displayName}}</div>
-    <div class="col">{{this.reminder.weather}}</div>
+    <div class="col">{{(this.reminder?.city | findInList: this.cities: 'key')?.displayName}}</div>
+    <div class="col">{{this.reminder?.weather}}</div>
   </div>
-  <div>{{this.reminder.time}}</div>
-  <div>{{this.reminder.description}}</div>
+  <div>{{this.reminder?.time}}</div>
+  <div>{{this.reminder?.description}}</div>
 </div>

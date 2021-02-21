@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ReminderComponent } from './reminder.component';
+import {ReminderComponent} from './reminder.component';
+import {FindInListPipe} from '../../pipes/findInList.pipe';
 
 describe('ReminderComponent', () => {
   let component: ReminderComponent;
@@ -8,9 +9,9 @@ describe('ReminderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReminderComponent ]
+      declarations: [ReminderComponent, FindInListPipe]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

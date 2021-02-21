@@ -13,6 +13,7 @@ export class MonthComponent extends ApplicationBase implements OnChanges {
 
   constructor() {
     super();
+    this.days = [];
   }
 
   ngOnChanges(changes: SimpleChanges): void {

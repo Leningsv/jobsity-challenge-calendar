@@ -9,6 +9,7 @@ import {CalendarService} from '../../services/calendar.service';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {ApplicationBase} from '../../utils/application.base';
+import {REMINDER_COLORS} from '../../utils/settings/general.settings';
 
 @Component({
   selector: 'app-reminder-dialog',
@@ -48,7 +49,7 @@ export class ReminderDialogComponent extends ApplicationBase implements OnInit {
     this.maxDate = this.moment().endOf('year');
     this.actionEnum = ActionEnum;
     this.cities = CITIES;
-    this.colors = ['#94dbff', '#ffeb94', '#afff94', '#94dbff', '#ff94ff'];
+    this.colors = REMINDER_COLORS;
     this.initReminderForm();
   }
 

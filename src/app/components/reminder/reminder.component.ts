@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ReminderModel} from '../../utils/models/reminder.model';
-import {ActionEnum} from '../../utils/enums/action.enum';
-import {Action} from 'rxjs/internal/scheduler/Action';
 import {CityModel} from '../../utils/models/city.model';
 import {CITIES} from '../../utils/settings/city.settings';
 
