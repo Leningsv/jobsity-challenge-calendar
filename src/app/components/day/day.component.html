@@ -1,14 +1,16 @@
-<div>
-  <h4>{{this.date | customDate: 'D'}}</h4>
-</div>
-<div *ngIf="this.date | validateCalendarDate">
-  <button class="btn btn-sm btn-primary" (click)="this.openReminderDialog(this.actionEnum.insert)">
-    add
-  </button>
-  <button class="btn btn-sm btn-danger" *ngIf="(this.calendarService.reminders| filterRemindersByDate: this.date)?.length"
-          (click)="this.removeReminders()">
-    delete all
-  </button>
+<div class="row">
+  <div class="col-4">
+    {{this.date | customDate: 'D'}}
+  </div>
+  <div class="col-8 text-right" *ngIf="this.date | validateCalendarDate">
+    <button class="btn btn-sm btn-primary" (click)="this.openReminderDialog(this.actionEnum.insert)">
+      add
+    </button>
+    <button class="btn btn-sm btn-danger" *ngIf="(this.calendarService.reminders| filterRemindersByDate: this.date)?.length"
+            (click)="this.removeReminders()">
+      delete all
+    </button>
+  </div>
 </div>
 <div *ngFor="let reminder of this.calendarService.reminders| filterRemindersByDate: this.date| sortReminders;">
   <app-reminder [reminder]="reminder" (removeHandler)="this.removeReminder(reminder)"

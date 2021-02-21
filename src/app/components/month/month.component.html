@@ -11,8 +11,6 @@
   <tr *ngFor="let week of this.days| groupDaysInWeeks">
     <td [ngClass]="{'outside-date-month': (this.month|customDate: 'YYYY-M') !== (day| customDate: 'YYYY-M') }"
         *ngFor="let day of week">
-      {{(this.month|customDate: 'YYYY-M')}}
-      {{(day| customDate: 'YYYY-M')}}
       <app-day [date]="day"></app-day>
     </td>
   </tr>
